@@ -24,6 +24,23 @@
         "Time in the Channel Rack is circular (looping). Time in the Playlist is linear (your actual song). These are fundamentally different and serve different purposes."
       ],
       "tryThis": "Open FL Studio and press F5, F6, F7, F8, and F9 one at a time. For each window, write one sentence in your own words describing what you see — without looking anything up. After writing all five, compare your descriptions to the explanations above. Where were you right? Where were you surprised?"
+    },
+    {
+      "id": "m01-l02",
+      "title": "Setting Up Audio Drivers (ASIO)",
+      "slug": "audio-driver-setup",
+      "moduleSlug": "module-01-getting-started",
+      "order": 2,
+      "estimatedMinutes": 10,
+      "difficulty": "beginner",
+      "isFree": true,
+      "body": "If FL Studio sounds fine through your speakers but you notice a lag between pressing a key and hearing the note — or if the audio stutters and crackles — the problem is almost certainly your audio driver. This lesson fixes that.\n\n## Why Default Drivers Sound Bad\n\nWindows and macOS ship with audio drivers designed for general-purpose use: system sounds, video playback, browser audio. They add a safety buffer — called *latency* — to prevent dropouts. That buffer is fine for watching YouTube. For making music, a 200 ms delay between pressing a pad and hearing the kick drum destroys your ability to play in time.\n\nThe solution is a low-latency audio driver: **ASIO** on Windows, **CoreAudio** on Mac.\n\n## ASIO on Windows\n\nASIO (Audio Stream Input/Output) is a driver protocol developed by Steinberg that bypasses the Windows audio stack entirely and talks directly to your audio hardware.\n\n**If you have an audio interface** (Focusrite Scarlett, PreSonus AudioBox, etc.): install the ASIO drivers from the manufacturer's website. These are purpose-built for your hardware and will give the lowest latency.\n\n**If you don't have an audio interface**: install **ASIO4ALL** — a free wrapper that applies ASIO-style low-latency buffering to your built-in sound card. It won't match a dedicated interface, but it is dramatically better than the Windows defaults.\n\nASIO4ALL is free and available from its official site.\n\n## Configuring the Driver in FL Studio\n\n1. Open **Options → Audio Settings** (or press **F10**)\n2. Under **Device**, open the dropdown and select your ASIO driver (your interface name, or \"ASIO4ALL v2\")\n3. Click **Show ASIO panel** to open the driver's own control panel\n4. Set **Buffer length** — start at **256 samples** and work down\n\n## The Buffer Size Trade-off\n\n| Buffer Size | Latency | CPU Load |\n|---|---|---|\n| 64–128 samples | ~3–6 ms (excellent) | Higher — can cause dropouts |\n| 256 samples | ~12 ms (good) | Balanced — start here |\n| 512–1024 samples | ~23–46 ms (acceptable for mixing) | Lower |\n\n**Rule of thumb**: Use the lowest buffer size that does not produce clicks or dropouts while you are recording. When mixing without recording live, raise the buffer to free up CPU.\n\n## Checking Your Latency\n\nAfter selecting a driver, FL Studio shows **Input latency** and **Output latency** values at the bottom of the Audio Settings panel. Output latency under 15 ms is comfortable for live playing. Over 30 ms will feel noticeably sluggish.\n\n## macOS\n\nmacOS uses CoreAudio natively — FL Studio detects it automatically. You still need to set the buffer size in the same Audio Settings panel (F10). Start at 256 samples and lower until you hit dropouts, then back off one step.",
+      "keyTakeaways": [
+        "Default Windows audio drivers add 100–200 ms of latency — too slow for live playing. ASIO bypasses the Windows audio stack and brings latency under 15 ms.",
+        "If you don't own a dedicated audio interface, ASIO4ALL gives you ASIO-level low latency on your built-in sound card for free.",
+        "Buffer size is a trade-off: lower buffer = less latency but higher CPU load. Start at 256 samples and find the lowest value that runs without clicks on your machine."
+      ],
+      "tryThis": "Open FL Studio's Audio Settings (F10). Note your current output latency number. Switch to your ASIO driver (or ASIO4ALL), set the buffer to 256 samples, and note the new latency value. Now try 128 samples — does it play cleanly, or do you hear clicks? Find the lowest buffer size that runs without dropouts and leave it there."
     }
   ]
 }
