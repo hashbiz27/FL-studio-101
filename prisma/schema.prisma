@@ -1,0 +1,335 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ─── Enums ────────────────────────────────────────────────────────────────────
+
+enum SubscriptionTier {
+  FREE
+  PRO
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
+  TRIALING
+}
+
+enum QuestionType {
+  MULTIPLE_CHOICE
+  TRUE_FALSE
+}
+
+enum AchievementType {
+  MODULE_COMPLETE
+  LESSON_STREAK
+  QUIZ_PERFECT
+  FIRST_LESSON
+  COMMUNITY_POST
+}
+
+// ─── User ─────────────────────────────────────────────────────────────────────
+
+model User {
+  id           String           @id @default(cuid())
+  clerkId      String           @unique
+  email        String           @unique
+  displayName  String
+  bio          String?
+  avatarUrl    String?
+  role         String           @default("student")
+  tier         SubscriptionTier @default(FREE)
+  createdAt    DateTime         @default(now())
+  updatedAt    DateTime         @updatedAt
+
+  subscription  Subscription?
+  progress      LessonProgress[]
+  quizAttempts  QuizAttempt[]
+  comments      Comment[]
+  projects      UserProject[]
+  achievements  UserAchievement[]
+  notes         LessonNote[]
+
+  @@index([clerkId])
+  @@index([email])
+}
+
+// ─── Subscription ─────────────────────────────────────────────────────────────
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  stripeCustomerId     String             @unique
+  stripeSubscriptionId String?            @unique
+  stripePriceId        String?
+  status               SubscriptionStatus @default(TRIALING)
+  currentPeriodStart   DateTime?
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ─── Module ───────────────────────────────────────────────────────────────────
+
+model Module {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  title          String
+  description    String
+  order          Int
+  coverImageUrl  String?
+  isPublished    Boolean  @default(false)
+  isFree         Boolean  @default(false)
+  estimatedHours Float?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  lessons Lesson[]
+
+  @@index([order])
+  @@index([slug])
+}
+
+// ─── Lesson ───────────────────────────────────────────────────────────────────
+
+model Lesson {
+  id                   String   @id @default(cuid())
+  moduleId             String
+  slug                 String
+  title                String
+  description          String?
+  order                Int
+  muxAssetId           String?
+  muxPlaybackId        String?
+  videoDurationSeconds Int?
+  mdxContentPath       String?
+  isPublished          Boolean  @default(false)
+  isFree               Boolean  @default(false)
+  hasQuiz              Boolean  @default(false)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  module      Module             @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  attachments LessonAttachment[]
+  progress    LessonProgress[]
+  quiz        Quiz?
+  comments    Comment[]
+  notes       LessonNote[]
+
+  @@unique([moduleId, slug])
+  @@unique([moduleId, order])
+  @@index([moduleId])
+}
+
+// ─── LessonAttachment ─────────────────────────────────────────────────────────
+
+model LessonAttachment {
+  id         String   @id @default(cuid())
+  lessonId   String
+  label      String
+  fileUrl    String
+  fileType   String
+  fileSizeKb Int?
+  createdAt  DateTime @default(now())
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+}
+
+// ─── LessonProgress ───────────────────────────────────────────────────────────
+
+model LessonProgress {
+  id             String    @id @default(cuid())
+  userId         String
+  lessonId       String
+  completed      Boolean   @default(false)
+  completedAt    DateTime?
+  watchedSeconds Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+  @@index([lessonId])
+}
+
+// ─── Quiz ─────────────────────────────────────────────────────────────────────
+
+model Quiz {
+  id           String   @id @default(cuid())
+  lessonId     String   @unique
+  title        String
+  passingScore Int      @default(70)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  lesson    Lesson         @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+}
+
+// ─── QuizQuestion ─────────────────────────────────────────────────────────────
+
+model QuizQuestion {
+  id           String       @id @default(cuid())
+  quizId       String
+  order        Int
+  questionText String
+  questionType QuestionType @default(MULTIPLE_CHOICE)
+  explanation  String?
+  createdAt    DateTime     @default(now())
+
+  quiz    Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  options QuizOption[]
+  answers QuizAnswer[]
+
+  @@unique([quizId, order])
+  @@index([quizId])
+}
+
+// ─── QuizOption ───────────────────────────────────────────────────────────────
+
+model QuizOption {
+  id         String   @id @default(cuid())
+  questionId String
+  text       String
+  isCorrect  Boolean  @default(false)
+  order      Int
+
+  question QuizQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@index([questionId])
+}
+
+// ─── QuizAttempt ──────────────────────────────────────────────────────────────
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  userId      String
+  quizId      String
+  score       Int
+  passed      Boolean
+  attemptedAt DateTime @default(now())
+
+  user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz    Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  answers QuizAnswer[]
+
+  @@index([userId, quizId])
+}
+
+// ─── QuizAnswer ───────────────────────────────────────────────────────────────
+
+model QuizAnswer {
+  id               String  @id @default(cuid())
+  attemptId        String
+  questionId       String
+  selectedOptionId String?
+  isCorrect        Boolean
+
+  attempt  QuizAttempt  @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+  question QuizQuestion @relation(fields: [questionId], references: [id])
+
+  @@index([attemptId])
+}
+
+// ─── Comment ──────────────────────────────────────────────────────────────────
+
+model Comment {
+  id        String   @id @default(cuid())
+  lessonId  String
+  userId    String
+  body      String   @db.Text
+  isPinned  Boolean  @default(false)
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([lessonId])
+  @@index([userId])
+}
+
+// ─── UserProject ──────────────────────────────────────────────────────────────
+
+model UserProject {
+  id              String   @id @default(cuid())
+  userId          String
+  title           String
+  description     String?
+  genre           String?
+  audioPreviewUrl String?
+  projectFileUrl  String?
+  relatedLessonId String?
+  isPublic        Boolean  @default(true)
+  viewCount       Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([genre])
+}
+
+// ─── Achievement ──────────────────────────────────────────────────────────────
+
+model Achievement {
+  id          String          @id @default(cuid())
+  slug        String          @unique
+  title       String
+  description String
+  type        AchievementType
+  iconUrl     String?
+  createdAt   DateTime        @default(now())
+
+  userAchievements UserAchievement[]
+}
+
+// ─── UserAchievement ──────────────────────────────────────────────────────────
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  earnedAt      DateTime @default(now())
+
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  achievement Achievement @relation(fields: [achievementId], references: [id])
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+}
+
+// ─── LessonNote ───────────────────────────────────────────────────────────────
+
+model LessonNote {
+  id        String   @id @default(cuid())
+  userId    String
+  lessonId  String
+  body      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+}
