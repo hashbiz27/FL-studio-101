@@ -3,10 +3,11 @@ import m01 from './module-01-getting-started.json'
 import m02 from './module-02-your-first-beat.json'
 import m03 from './module-03-sound-design-fundamentals.json'
 import m04 from './module-04-sampling-chopping.json'
+import m05 from './module-05-piano-roll-mastery.json'
 
 type ModuleJSON = { module: Omit<ModuleContent, 'lessons'>; lessons: LessonContent[] }
 
-const RAW: ModuleJSON[] = [m01, m02, m03, m04] as ModuleJSON[]
+const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05] as ModuleJSON[]
 
 export const ALL_MODULE_CONTENT: ModuleContent[] = RAW.map(({ module, lessons }) => ({
   ...module,

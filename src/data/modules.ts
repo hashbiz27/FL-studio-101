@@ -41,12 +41,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.2,
   },
   {
-    slug: 'module-05-sound-selection',
-    title: 'Sound Selection',
+    slug: 'module-05-piano-roll-mastery',
+    title: 'Piano Roll Mastery',
     order: 5,
-    lessonCount: 8,
+    lessonCount: 5,
     isFree: false,
-    estimatedHours: 2.5,
+    estimatedHours: 1.3,
   },
   {
     slug: 'module-06-sound-design',
