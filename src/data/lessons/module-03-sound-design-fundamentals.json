@@ -1,0 +1,29 @@
+{
+  "module": {
+    "slug": "module-03-sound-design-fundamentals",
+    "title": "Sound Design Fundamentals",
+    "order": 3,
+    "description": "Learn to shape sound from first principles — oscillators, filters, envelopes, FM synthesis — so you can design exactly the sound you hear in your head rather than settling for what a preset gives you.",
+    "isFree": false,
+    "estimatedHours": 1.5
+  },
+  "lessons": [
+    {
+      "id": "m03-l01",
+      "title": "Understanding Oscillators",
+      "slug": "understanding-oscillators",
+      "moduleSlug": "module-03-sound-design-fundamentals",
+      "order": 1,
+      "estimatedMinutes": 12,
+      "difficulty": "beginner",
+      "isFree": false,
+      "body": "Every synthesised sound begins with an oscillator — an electronic circuit (or its software equivalent) that produces a repeating waveform at a set frequency. The frequency determines pitch. The *shape* of the waveform determines timbre: what the sound actually sounds like beyond its pitch.\n\nUnderstanding the four basic waveforms is the single most useful thing you can learn before touching a synthesiser. Once you can hear a waveform and know which one it is, sound design stops being guesswork.\n\n## The Four Basic Waveforms\n\n**Sine wave** — the purest sound possible. A sine wave contains only the fundamental frequency and no harmonics at all. It sounds smooth, round, and hollow — think of a tuning fork or a pure whistle. Because it has no harmonic content, it sits cleanly in a mix without interfering with other sounds. Sines are the go-to for sub-bass (below 80 Hz) and for creating soft, airy tones.\n\n**Triangle wave** — like a sine with a small number of odd harmonics added. It sounds slightly brighter and more present than a sine but still retains a soft, rounded quality. Useful for flute-like leads, soft keys sounds, and anywhere you want a sine but with a little more character.\n\n**Square wave** — contains only odd harmonics (the 3rd, 5th, 7th partial, and so on), each progressively quieter. It sounds hollow and reedy — not unlike a clarinet, which also emphasises odd harmonics due to its cylindrical bore. Square waves work well for vintage-style leads, organ emulations, and chiptune sounds. At lower pitches they take on a thick, buzzy quality.\n\n**Sawtooth wave** — contains *all* harmonics, both odd and even, diminishing in a consistent pattern. This makes it the brightest and richest of the four shapes. A sawtooth sounds like a buzzing, brash tone — imagine a bowed string or a brass instrument. Because it has the most harmonic content, it gives a filter the most material to work with, which is why it is the default starting point for most subtractive synthesis patches.\n\n## Frequency and Pitch\n\nOscillators are tuned in two units:\n\n- **Semitones** (coarse tuning) — one semitone is one piano key. Tuning two oscillators apart by a musical interval (a fifth = 7 semitones, an octave = 12 semitones) creates harmonic richness or deliberate dissonance.\n- **Cents** (fine tuning) — 100 cents = 1 semitone. Detuning two oscillators by a small number of cents (2–10) creates a subtle beating effect as their waveforms drift in and out of phase. This is what gives synthesised sounds their characteristic shimmer and width.\n\n## Detune and Unison\n\n**Detune** — offsetting two or more oscillators by a few cents from each other. The resulting interference pattern creates a chorus-like thickening. A single oscillator sounds static and synthetic; two slightly detuned sawtooth waves together sound alive.\n\n**Unison** — stacking multiple copies of the same oscillator, each offset in pitch and/or phase. Four unison voices at ±10 cents produces a lush, wide sound often described as \"supersaw\" when using the sawtooth waveform. The more voices, the thicker — but also the less focused and punchier. Unison is used heavily in EDM leads and pads.\n\n## Phase\n\nPhase describes where in its cycle a waveform starts when a note is triggered. Most synthesisers let you set this to random (the oscillator starts at a random point each time you press a key) or fixed (it always starts at the same point). Fixed phase gives a consistent, punchy transient on attack — useful for leads and basses. Random phase gives a slightly different character each note — useful for pads and evolving sounds.",
+      "keyTakeaways": [
+        "The four basic waveforms — sine, triangle, square, sawtooth — each have a distinct harmonic content that determines their tonal character before any filter or effect is applied. Sawtooth has the most harmonics; sine has none.",
+        "Detuning two oscillators by a few cents against each other creates a beating interference that makes synthesised sounds feel alive. This is the foundation of the 'supersaw' and most rich pad sounds.",
+        "Pitch is set in semitones (coarse) and cents (fine). Tuning oscillators a musical interval apart — a fifth (7 semitones), an octave (12) — adds harmonic richness intentionally rather than randomly."
+      ],
+      "tryThis": "Open any synthesiser in FL Studio — 3xOsc works well for this. Set all three oscillators to the same pitch and cycle through each waveform shape one at a time: sine, triangle, square, sawtooth. Play the same note for each and just listen. Can you hear how each shape gets progressively brighter and more complex? Then set OSC1 and OSC2 both to sawtooth and detune OSC2 by +7 cents. Play a note. That shimmer you hear is the beating effect — that single change is responsible for most of the 'thickness' in modern synthesised sounds."
+    }
+  ]
+}
