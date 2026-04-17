@@ -8,10 +8,11 @@ import m06 from './module-06-mixing-essentials.json'
 import m07 from './module-07-arrangement-song-structure.json'
 import m08 from './module-08-the-fl-mixer.json'
 import m09 from './module-09-eq-frequency.json'
+import m10 from './module-10-compression.json'
 
 type ModuleJSON = { module: Omit<ModuleContent, 'lessons'>; lessons: LessonContent[] }
 
-const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09] as ModuleJSON[]
+const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09, m10] as ModuleJSON[]
 
 export const ALL_MODULE_CONTENT: ModuleContent[] = RAW.map(({ module, lessons }) => ({
   ...module,

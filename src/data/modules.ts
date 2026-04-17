@@ -84,9 +84,9 @@ export const MODULES: ModuleMeta[] = [
     slug: 'module-10-compression',
     title: 'Compression',
     order: 10,
-    lessonCount: 8,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3,
+    estimatedHours: 1.3,
   },
   {
     slug: 'module-11-effects',
