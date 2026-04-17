@@ -1,0 +1,29 @@
+{
+  "module": {
+    "slug": "module-01-getting-started",
+    "title": "Getting Started",
+    "order": 1,
+    "description": "Learn FL Studio's core interface and essential setup before you make a single sound. Every skill in this course builds on these foundations.",
+    "isFree": true,
+    "estimatedHours": 1.2
+  },
+  "lessons": [
+    {
+      "id": "m01-l01",
+      "title": "FL Studio Interface Overview",
+      "slug": "interface-overview",
+      "moduleSlug": "module-01-getting-started",
+      "order": 1,
+      "estimatedMinutes": 12,
+      "difficulty": "beginner",
+      "isFree": true,
+      "body": "When you first open FL Studio, four windows define everything you will do here. Understanding what each one is *for* — before touching any of them — will save you hours of confusion.\n\n## The Four Core Windows\n\n**Toolbar** (the strip at the top of the screen) — transport controls (play, stop, record), the BPM display, time signature, master volume, and master pitch. This bar is always visible regardless of which other windows you have open.\n\n**Channel Rack (F6)** — where you build *patterns*. Each row is one sound source: a drum hit, a synth, a sample. The step sequencer grid on the right lets you trigger each sound at specific points in a bar. Think of it as your loop-building workspace.\n\n**Playlist (F5)** — the arrangement view. Once you have built a pattern in the Channel Rack, you place it here as a block on a timeline. Time moves left to right; each row is a separate track. This is where a collection of loops becomes a full song.\n\n**Mixer (F9)** — where you balance levels and add effects per sound. By default everything routes to the master output — you need individual routing before you can EQ or compress sounds independently.\n\n## The Mental Model That Changes Everything\n\nThe Channel Rack builds loops. The Playlist arranges them into a song.\n\nThis distinction trips up almost every beginner. You can spend an hour building a great drum pattern in the Channel Rack, but if you never open the Playlist and place that pattern onto a track, your project will never be longer than a single bar. Time in the Channel Rack is *circular* — it loops. Time in the Playlist is *linear* — it is your song.\n\n## Keyboard Shortcuts to Learn Now\n\n| Window | Shortcut |\n|---|---|\n| Playlist | F5 |\n| Channel Rack | F6 |\n| Piano Roll | F7 |\n| Browser | F8 |\n| Mixer | F9 |\n| Audio Settings | F10 |\n\nFL Studio is designed to keep all four main windows open simultaneously, either floating or docked. Spend five minutes now arranging them so nothing overlaps, then save this as your default template (Options → Save default template).",
+      "keyTakeaways": [
+        "The Channel Rack builds patterns (loops). The Playlist arranges them into a song. Without placing patterns in the Playlist, a project is just a loop playing in circles.",
+        "FL Studio has four core windows — Toolbar, Channel Rack (F6), Playlist (F5), and Mixer (F9) — each with a dedicated keyboard shortcut worth memorising now.",
+        "Time in the Channel Rack is circular (looping). Time in the Playlist is linear (your actual song). These are fundamentally different and serve different purposes."
+      ],
+      "tryThis": "Open FL Studio and press F5, F6, F7, F8, and F9 one at a time. For each window, write one sentence in your own words describing what you see — without looking anything up. After writing all five, compare your descriptions to the explanations above. Where were you right? Where were you surprised?"
+    }
+  ]
+}
