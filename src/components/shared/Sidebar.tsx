@@ -1,17 +1,10 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import {
-  ChevronLeft,
-  Gauge,
-  Lock,
-  Music2,
-  Settings,
-  Users,
-  X,
-} from 'lucide-react'
+import { ChevronLeft, Gauge, Lock, Music2, Settings, Users, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useUIStore } from '@/store/uiStore'
 import { MODULES } from '@/data/modules'
+import { useAllModuleProgress } from '@/hooks/useProgress'
 
 function useIsDesktop() {
   const [isDesktop, setIsDesktop] = useState(
@@ -45,28 +38,25 @@ export default function Sidebar() {
   const toggleSidebarCollapse = useUIStore((s) => s.toggleSidebarCollapse)
 
   const isDesktop = useIsDesktop()
-  // Collapsed state only applies on desktop
   const collapsed = sidebarCollapsed && isDesktop
+  const moduleProgress = useAllModuleProgress()
 
   return (
     <aside
       className={cn(
-        // Base
         'flex flex-col overflow-hidden shrink-0',
         'bg-white dark:bg-gray-900',
         'border-r border-gray-200 dark:border-gray-800',
-        // Mobile: fixed overlay, slides left/right
         'fixed inset-y-0 left-0 z-50 w-64',
         'transition-transform duration-300 ease-in-out',
         sidebarOpen ? 'translate-x-0' : '-translate-x-full',
-        // Desktop: static in flex flow, width-driven
         'md:relative md:inset-auto md:z-auto',
         'md:translate-x-0',
         'md:transition-[width] md:duration-300 md:ease-in-out',
         collapsed ? 'md:w-16' : 'md:w-64',
       )}
     >
-      {/* ── Sidebar header ─────────────────────────────── */}
+      {/* Sidebar header */}
       <div
         className={cn(
           'flex items-center h-14 shrink-0 px-4 gap-2.5',
@@ -75,13 +65,11 @@ export default function Sidebar() {
         )}
       >
         <Music2 className="shrink-0 w-5 h-5 text-studio-500" />
-
         {!collapsed && (
           <>
             <span className="font-semibold text-sm text-gray-900 dark:text-gray-100 truncate">
               FL Studio 101
             </span>
-            {/* Mobile close button */}
             <button
               onClick={() => setSidebarOpen(false)}
               className={cn(
@@ -98,7 +86,7 @@ export default function Sidebar() {
         )}
       </div>
 
-      {/* ── Scrollable nav ─────────────────────────────── */}
+      {/* Scrollable nav */}
       <nav className="flex-1 overflow-y-auto py-3 px-2 space-y-0.5">
         {/* Dashboard */}
         <NavLink
@@ -113,7 +101,7 @@ export default function Sidebar() {
           {!collapsed && <span className="truncate">Dashboard</span>}
         </NavLink>
 
-        {/* Curriculum section */}
+        {/* Curriculum section label */}
         <div className="pt-4 pb-1.5">
           {collapsed ? (
             <div className="h-px bg-gray-200 dark:bg-gray-800 mx-2" />
@@ -125,52 +113,60 @@ export default function Sidebar() {
         </div>
 
         {/* Module list */}
-        {MODULES.map((module) => (
-          <NavLink
-            key={module.slug}
-            to={`/learn/${module.slug}`}
-            end={false}
-            title={
-              collapsed
-                ? `${String(module.order).padStart(2, '0')}. ${module.title}`
-                : undefined
-            }
-            className={({ isActive }) =>
-              cn(
-                navItemClass(isActive),
-                collapsed ? 'justify-center p-2' : 'items-center gap-2.5 px-2.5 py-2',
-              )
-            }
-          >
-            {/* Module number badge */}
-            <span
-              className={cn(
-                'shrink-0 w-5 h-5 flex items-center justify-center',
-                'text-[10px] font-mono font-semibold rounded',
-                'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-500',
-              )}
-            >
-              {String(module.order).padStart(2, '0')}
-            </span>
-
-            {!collapsed && (
-              <>
-                <span className="flex-1 truncate">{module.title}</span>
-                <span className="shrink-0">
-                  {module.isFree ? (
-                    <span className="text-[9px] font-semibold text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-1 py-0.5 rounded">
-                      FREE
-                    </span>
-                  ) : (
-                    <Lock className="w-3 h-3 text-gray-300 dark:text-gray-700" />
+        {MODULES.map((module) => {
+          const progress = moduleProgress[module.slug]
+          return (
+            <div key={module.slug}>
+              <NavLink
+                to={`/learn/${module.slug}`}
+                end={false}
+                title={collapsed ? `${String(module.order).padStart(2, '0')}. ${module.title}` : undefined}
+                className={({ isActive }) =>
+                  cn(
+                    navItemClass(isActive),
+                    'relative overflow-hidden',
+                    collapsed ? 'justify-center p-2' : 'items-center gap-2.5 px-2.5 py-2',
+                  )
+                }
+              >
+                {/* Module number badge */}
+                <span
+                  className={cn(
+                    'shrink-0 w-5 h-5 flex items-center justify-center',
+                    'text-[10px] font-mono font-semibold rounded',
+                    'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-500',
                   )}
+                >
+                  {String(module.order).padStart(2, '0')}
                 </span>
-              </>
-            )}
-          </NavLink>
-        ))}
 
-        {/* Other section */}
+                {!collapsed && (
+                  <>
+                    <span className="flex-1 truncate">{module.title}</span>
+                    <span className="shrink-0">
+                      {module.isFree ? (
+                        <span className="text-[9px] font-semibold text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-500/10 px-1 py-0.5 rounded">
+                          FREE
+                        </span>
+                      ) : (
+                        <Lock className="w-3 h-3 text-gray-300 dark:text-gray-700" />
+                      )}
+                    </span>
+                    {/* Progress underline — only shown when started */}
+                    {progress && progress.percent > 0 && (
+                      <span
+                        className="absolute bottom-0 left-0 h-0.5 bg-studio-500/50 transition-[width] duration-500"
+                        style={{ width: `${progress.percent}%` }}
+                      />
+                    )}
+                  </>
+                )}
+              </NavLink>
+            </div>
+          )
+        })}
+
+        {/* Other section label */}
         <div className="pt-4 pb-1.5">
           {collapsed ? (
             <div className="h-px bg-gray-200 dark:bg-gray-800 mx-2" />
@@ -206,7 +202,7 @@ export default function Sidebar() {
         </NavLink>
       </nav>
 
-      {/* ── Desktop collapse toggle ─────────────────────── */}
+      {/* Desktop collapse toggle */}
       <div className="hidden md:block shrink-0 border-t border-gray-200 dark:border-gray-800 p-2">
         <button
           onClick={toggleSidebarCollapse}
@@ -219,10 +215,7 @@ export default function Sidebar() {
           )}
         >
           <ChevronLeft
-            className={cn(
-              'shrink-0 w-4 h-4 transition-transform duration-300',
-              collapsed && 'rotate-180',
-            )}
+            className={cn('shrink-0 w-4 h-4 transition-transform duration-300', collapsed && 'rotate-180')}
           />
           {!collapsed && <span className="text-sm truncate">Collapse</span>}
         </button>
