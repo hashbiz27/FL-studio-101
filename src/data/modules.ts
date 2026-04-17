@@ -57,12 +57,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.5,
   },
   {
-    slug: 'module-07-arrangement',
-    title: 'Arrangement',
+    slug: 'module-07-arrangement-song-structure',
+    title: 'Arrangement & Song Structure',
     order: 7,
-    lessonCount: 10,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3.5,
+    estimatedHours: 1.5,
   },
   {
     slug: 'module-08-mixer',
