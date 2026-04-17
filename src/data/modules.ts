@@ -33,12 +33,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.5,
   },
   {
-    slug: 'module-04-melody',
-    title: 'Melody & Harmony',
+    slug: 'module-04-sampling-chopping',
+    title: 'Sampling & Chopping',
     order: 4,
-    lessonCount: 12,
+    lessonCount: 5,
     isFree: false,
-    estimatedHours: 4,
+    estimatedHours: 1.2,
   },
   {
     slug: 'module-05-sound-selection',
