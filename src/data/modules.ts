@@ -49,12 +49,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.3,
   },
   {
-    slug: 'module-06-sound-design',
-    title: 'Sound Design',
+    slug: 'module-06-mixing-essentials',
+    title: 'Mixing Essentials',
     order: 6,
-    lessonCount: 10,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 4,
+    estimatedHours: 1.5,
   },
   {
     slug: 'module-07-arrangement',
