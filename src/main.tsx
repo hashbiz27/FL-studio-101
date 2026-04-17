@@ -4,6 +4,7 @@ import { ClerkProvider } from '@clerk/clerk-react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import App from './App'
 import './index.css'
+import 'highlight.js/styles/github-dark-dimmed.css'
 
 const queryClient = new QueryClient()
 const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string | undefined
