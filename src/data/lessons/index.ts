@@ -1,10 +1,11 @@
 import type { LessonContent, ModuleContent } from '@/types/content'
 import m01 from './module-01-getting-started.json'
 import m02 from './module-02-your-first-beat.json'
+import m03 from './module-03-sound-design-fundamentals.json'
 
 type ModuleJSON = { module: Omit<ModuleContent, 'lessons'>; lessons: LessonContent[] }
 
-const RAW: ModuleJSON[] = [m01, m02] as ModuleJSON[]
+const RAW: ModuleJSON[] = [m01, m02, m03] as ModuleJSON[]
 
 export const ALL_MODULE_CONTENT: ModuleContent[] = RAW.map(({ module, lessons }) => ({
   ...module,

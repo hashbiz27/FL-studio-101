@@ -25,12 +25,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.5,
   },
   {
-    slug: 'module-03-rhythm',
-    title: 'Rhythm & Groove',
+    slug: 'module-03-sound-design-fundamentals',
+    title: 'Sound Design Fundamentals',
     order: 3,
-    lessonCount: 9,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3,
+    estimatedHours: 1.5,
   },
   {
     slug: 'module-04-melody',
