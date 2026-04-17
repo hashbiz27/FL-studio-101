@@ -73,12 +73,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.2,
   },
   {
-    slug: 'module-09-eq',
+    slug: 'module-09-eq-frequency',
     title: 'EQ & Frequency',
     order: 9,
-    lessonCount: 8,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3,
+    estimatedHours: 1.3,
   },
   {
     slug: 'module-10-compression',
