@@ -11,10 +11,11 @@ import m09 from './module-09-eq-frequency.json'
 import m10 from './module-10-compression.json'
 import m11 from './module-11-space-effects.json'
 import m12 from './module-12-mastering.json'
+import m13 from './module-13-trap.json'
 
 type ModuleJSON = { module: Omit<ModuleContent, 'lessons'>; lessons: LessonContent[] }
 
-const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09, m10, m11, m12] as ModuleJSON[]
+const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09, m10, m11, m12, m13] as ModuleJSON[]
 
 export const ALL_MODULE_CONTENT: ModuleContent[] = RAW.map(({ module, lessons }) => ({
   ...module,

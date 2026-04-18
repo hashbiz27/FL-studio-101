@@ -108,9 +108,9 @@ export const MODULES: ModuleMeta[] = [
     slug: 'module-13-trap',
     title: 'Genre: Trap',
     order: 13,
-    lessonCount: 7,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3,
+    estimatedHours: 1.5,
   },
   {
     slug: 'module-14-lofi',
