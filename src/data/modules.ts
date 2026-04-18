@@ -126,7 +126,7 @@ export const MODULES: ModuleMeta[] = [
     order: 15,
     lessonCount: 6,
     isFree: false,
-    estimatedHours: 2.5,
+    estimatedHours: 1.5,
   },
 ]
 
