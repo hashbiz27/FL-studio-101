@@ -16,10 +16,11 @@ import m14 from './module-14-lofi.json'
 import m15 from './module-15-house.json'
 import m16 from './module-16-bass-low-end.json'
 import m17 from './module-17-sound-design-advanced.json'
+import m18 from './module-18-workflow-mindset.json'
 
 type ModuleJSON = { module: Omit<ModuleContent, 'lessons'>; lessons: LessonContent[] }
 
-const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09, m10, m11, m12, m13, m14, m15, m16, m17] as ModuleJSON[]
+const RAW: ModuleJSON[] = [m01, m02, m03, m04, m05, m06, m07, m08, m09, m10, m11, m12, m13, m14, m15, m16, m17, m18] as ModuleJSON[]
 
 export const ALL_MODULE_CONTENT: ModuleContent[] = RAW.map(({ module, lessons }) => ({
   ...module,
