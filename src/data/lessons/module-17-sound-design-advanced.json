@@ -2,7 +2,7 @@
   "module": {
     "slug": "module-17-sound-design-advanced",
     "title": "Sound Design II — Advanced",
-    "order": 17,
+    "order": 14,
     "description": "Go deep into FM synthesis, wavetable design, granular textures, and advanced modulation. Learn to build unique sounds from first principles and develop the synthesis vocabulary to create any timbre you can imagine.",
     "isFree": false,
     "estimatedHours": 1.5

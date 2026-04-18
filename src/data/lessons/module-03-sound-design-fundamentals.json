@@ -2,7 +2,7 @@
   "module": {
     "slug": "module-03-sound-design-fundamentals",
     "title": "Sound Design Fundamentals",
-    "order": 3,
+    "order": 4,
     "description": "Learn to shape sound from first principles — oscillators, filters, envelopes, FM synthesis — so you can design exactly the sound you hear in your head rather than settling for what a preset gives you.",
     "isFree": false,
     "estimatedHours": 1.5

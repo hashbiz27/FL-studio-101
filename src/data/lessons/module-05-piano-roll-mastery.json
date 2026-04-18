@@ -2,7 +2,7 @@
   "module": {
     "slug": "module-05-piano-roll-mastery",
     "title": "Piano Roll Mastery",
-    "order": 5,
+    "order": 3,
     "description": "Go beyond placing random notes — learn to draw melodies with purpose, stack chords that actually sound good, use ghost notes for context, add slides and portamento, and make MIDI feel played rather than programmed.",
     "isFree": false,
     "estimatedHours": 1.3

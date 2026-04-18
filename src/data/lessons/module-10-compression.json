@@ -2,7 +2,7 @@
   "module": {
     "slug": "module-10-compression",
     "title": "Compression",
-    "order": 10,
+    "order": 11,
     "description": "Go beyond the basics — understand compressor types and their characters, shape transients, use parallel compression, glue buses, and train your ear to hear what compression is actually doing.",
     "isFree": false,
     "estimatedHours": 1.3

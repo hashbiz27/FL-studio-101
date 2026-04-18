@@ -2,7 +2,7 @@
   "module": {
     "slug": "module-04-sampling-chopping",
     "title": "Sampling & Chopping",
-    "order": 4,
+    "order": 6,
     "description": "Learn to work with audio samples the way professionals do — loading, mapping, chopping, stretching, pitch-shifting, and resampling your own sounds to build entirely new ones.",
     "isFree": false,
     "estimatedHours": 1.2
