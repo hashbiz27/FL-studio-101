@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import { ChevronLeft, Gauge, Lock, Music2, Settings, Users, X } from 'lucide-react'
+import { BookKey, ChevronLeft, Gauge, Lock, Music2, Settings, Users, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useUIStore } from '@/store/uiStore'
 import { MODULES } from '@/data/modules'
@@ -176,6 +176,17 @@ export default function Sidebar() {
             </p>
           )}
         </div>
+
+        <NavLink
+          to="/cheatsheet"
+          title={collapsed ? 'Cheat Sheets' : undefined}
+          className={({ isActive }) =>
+            cn(navItemClass(isActive), collapsed ? 'justify-center p-2' : 'items-center gap-2.5 px-2.5 py-2')
+          }
+        >
+          <BookKey className="shrink-0 w-4 h-4" />
+          {!collapsed && <span className="truncate">Cheat Sheets</span>}
+        </NavLink>
 
         <NavLink
           to="/community"

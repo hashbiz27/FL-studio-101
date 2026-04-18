@@ -11,6 +11,10 @@ import LessonPage from '@/pages/learn/LessonPage'
 import CommunityPage from '@/pages/community/CommunityPage'
 import ProjectDetailPage from '@/pages/community/ProjectDetailPage'
 import SettingsPage from '@/pages/settings/SettingsPage'
+import CheatSheetIndexPage from '@/pages/cheatsheet/CheatSheetIndexPage'
+import ShortcutsPage from '@/pages/cheatsheet/ShortcutsPage'
+import ChecklistPage from '@/pages/cheatsheet/ChecklistPage'
+import PluginsPage from '@/pages/cheatsheet/PluginsPage'
 
 export default function App() {
   return (
@@ -33,6 +37,10 @@ export default function App() {
           <Route path="/community" element={<CommunityPage />} />
           <Route path="/community/:projectId" element={<ProjectDetailPage />} />
           <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/cheatsheet" element={<CheatSheetIndexPage />} />
+          <Route path="/cheatsheet/shortcuts" element={<ShortcutsPage />} />
+          <Route path="/cheatsheet/checklist" element={<ChecklistPage />} />
+          <Route path="/cheatsheet/plugins" element={<PluginsPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
