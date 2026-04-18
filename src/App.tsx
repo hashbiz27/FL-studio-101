@@ -15,6 +15,7 @@ import CheatSheetIndexPage from '@/pages/cheatsheet/CheatSheetIndexPage'
 import ShortcutsPage from '@/pages/cheatsheet/ShortcutsPage'
 import ChecklistPage from '@/pages/cheatsheet/ChecklistPage'
 import PluginsPage from '@/pages/cheatsheet/PluginsPage'
+import GlossaryPage from '@/pages/cheatsheet/GlossaryPage'
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/cheatsheet/shortcuts" element={<ShortcutsPage />} />
           <Route path="/cheatsheet/checklist" element={<ChecklistPage />} />
           <Route path="/cheatsheet/plugins" element={<PluginsPage />} />
+          <Route path="/cheatsheet/glossary" element={<GlossaryPage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

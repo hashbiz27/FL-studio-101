@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { BookKey, CheckSquare, Layers } from 'lucide-react'
+import { BookKey, BookOpen, CheckSquare, Layers } from 'lucide-react'
 
 const tools = [
   {
@@ -32,6 +32,16 @@ const tools = [
     bg: 'bg-amber-500/5 hover:bg-amber-500/10',
     border: 'border-amber-500/20 hover:border-amber-500/40',
   },
+  {
+    to: '/cheatsheet/glossary',
+    icon: BookOpen,
+    title: 'Glossary',
+    description: '64 music production terms — plain English definitions with FL Studio context and links to the relevant lesson.',
+    cta: 'Browse glossary',
+    accent: 'text-violet-500',
+    bg: 'bg-violet-500/5 hover:bg-violet-500/10',
+    border: 'border-violet-500/20 hover:border-violet-500/40',
+  },
 ]
 
 export default function CheatSheetIndexPage() {
@@ -44,7 +54,7 @@ export default function CheatSheetIndexPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {tools.map(({ to, icon: Icon, title, description, cta, accent, bg, border }) => (
           <Link
             key={to}
