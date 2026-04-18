@@ -1,5 +1,6 @@
 import { Music2, Upload, MessageSquare, ThumbsUp, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const PLACEHOLDER_PROJECTS = [
   {
@@ -52,6 +53,7 @@ const GENRE_COLORS: Record<string, string> = {
 }
 
 export default function CommunityPage() {
+  usePageTitle('Community')
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Header */}

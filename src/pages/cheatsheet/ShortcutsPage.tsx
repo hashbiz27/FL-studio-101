@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Search } from 'lucide-react'
 import { SHORTCUTS, type ShortcutCategory } from '@/data/cheatsheet'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const CATEGORIES: ShortcutCategory[] = [
   'Global',
@@ -22,6 +23,7 @@ function KeyBadge({ k }: { k: string }) {
 }
 
 export default function ShortcutsPage() {
+  usePageTitle('Keyboard Shortcuts')
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState<ShortcutCategory | 'All'>('All')
 
@@ -44,10 +46,11 @@ export default function ShortcutsPage() {
       </div>
 
       {/* Search */}
-      <div className="relative">
+      <div role="search" className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
         <input
           type="search"
+          aria-label="Search shortcuts"
           placeholder="Search shortcuts…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -61,6 +64,7 @@ export default function ShortcutsPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
+            aria-pressed={activeCategory === cat}
             className={cn(
               'px-3 py-1 rounded-full text-xs font-medium transition-colors border',
               activeCategory === cat
@@ -86,17 +90,17 @@ export default function ShortcutsPage() {
           No shortcuts match your search.
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden">
-          <table className="w-full text-sm">
+        <div className="rounded-xl border border-gray-200 dark:border-gray-800 overflow-hidden overflow-x-auto">
+          <table className="w-full min-w-[520px] text-sm">
             <thead>
               <tr className="border-b border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/60">
-                <th className="px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                <th scope="col" className="px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
                   Action
                 </th>
-                <th className="px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 w-48">
+                <th scope="col" className="px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 w-48">
                   Shortcut
                 </th>
-                <th className="hidden sm:table-cell px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 w-32">
+                <th scope="col" className="hidden sm:table-cell px-4 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 w-32">
                   Window
                 </th>
               </tr>

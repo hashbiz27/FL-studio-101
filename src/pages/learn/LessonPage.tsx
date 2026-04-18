@@ -1,10 +1,12 @@
 import { useParams, Link } from 'react-router-dom'
-import { Clock, ChevronRight, Lightbulb, Wrench } from 'lucide-react'
+import { Clock, ChevronRight, Lightbulb, Wrench, FileX2 } from 'lucide-react'
 import { getLessonContent, getModuleContent, getAdjacentLessons } from '@/data/lessons'
 import LessonBody from '@/components/lesson/LessonBody'
 import TableOfContents from '@/components/lesson/TableOfContents'
 import LessonNav from '@/components/lesson/LessonNav'
 import LessonCompleteButton from '@/components/lesson/LessonCompleteButton'
+import EmptyState from '@/components/shared/EmptyState'
+import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 
 const DIFFICULTY_STYLES = {
   beginner: 'text-emerald-700 bg-emerald-50 dark:text-emerald-400 dark:bg-emerald-500/10',
@@ -21,18 +23,33 @@ export default function LessonPage() {
     ? getAdjacentLessons(lesson.id)
     : { prev: null, next: null }
 
+  useDocumentMeta({
+    title: lesson ? `${lesson.title} · ${module?.title}` : null,
+    description: lesson && module
+      ? `${lesson.title} — ${module.title}. ${lesson.estimatedMinutes}-minute lesson.`
+      : null,
+    ogType: lesson ? 'article' : 'website',
+  })
+
   if (!lesson || !module) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-gray-400">
-        Lesson not found.
-      </div>
+      <EmptyState
+        icon={FileX2}
+        title="Lesson not found"
+        description="This lesson doesn't exist or the URL is incorrect."
+        action={
+          <Link to="/learn" className="text-sm font-medium text-studio-500 hover:underline">
+            Back to curriculum
+          </Link>
+        }
+      />
     )
   }
 
   return (
     <div className="max-w-5xl mx-auto">
       {/* Breadcrumb */}
-      <nav className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-5">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 mb-5">
         <Link to="/learn" className="hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
           Curriculum
         </Link>
@@ -117,8 +134,8 @@ export default function LessonPage() {
           <LessonNav prev={prev} next={next} />
         </div>
 
-        {/* Table of contents — wide screens only */}
-        <aside className="hidden xl:block w-52 shrink-0 sticky top-6 self-start">
+        {/* Table of contents — large screens */}
+        <aside className="hidden lg:block w-52 shrink-0 sticky top-6 self-start">
           <TableOfContents markdown={lesson.body} />
         </aside>
       </div>

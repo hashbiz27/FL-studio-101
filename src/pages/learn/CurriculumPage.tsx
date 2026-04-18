@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import { Lock } from 'lucide-react'
 import { MODULES } from '@/data/modules'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 export default function CurriculumPage() {
+  usePageTitle('Curriculum')
   return (
     <div className="space-y-6">
       <div>

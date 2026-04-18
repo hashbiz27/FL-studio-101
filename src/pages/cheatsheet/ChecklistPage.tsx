@@ -2,6 +2,7 @@ import { CHECKLIST_ITEMS, type ChecklistPhase } from '@/data/cheatsheet'
 import { useChecklistStore } from '@/store/checklistStore'
 import { cn } from '@/lib/utils'
 import { RotateCcw, CheckCircle2 } from 'lucide-react'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const PHASES: ChecklistPhase[] = [
   'Gain Staging',
@@ -24,6 +25,7 @@ const PHASE_COLORS: Record<ChecklistPhase, string> = {
 }
 
 export default function ChecklistPage() {
+  usePageTitle('Pre-Bounce Checklist')
   const { checked, toggle, reset } = useChecklistStore()
 
   const total = CHECKLIST_ITEMS.length

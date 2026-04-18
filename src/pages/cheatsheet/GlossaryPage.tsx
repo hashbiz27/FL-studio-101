@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Search, BookOpen, ArrowRight } from 'lucide-react'
 import { GLOSSARY_TERMS } from '@/data/glossary'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
 
@@ -11,6 +12,7 @@ function firstLetter(term: string) {
 }
 
 export default function GlossaryPage() {
+  usePageTitle('Glossary')
   const [query, setQuery] = useState('')
   const [activeLetter, setActiveLetter] = useState<string | null>(null)
 
@@ -62,10 +64,11 @@ export default function GlossaryPage() {
       </div>
 
       {/* Search */}
-      <div className="relative">
+      <div role="search" className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
         <input
           type="search"
+          aria-label="Search glossary terms"
           placeholder="Search terms, definitions, or FL Studio notes…"
           value={query}
           onChange={(e) => {
@@ -85,6 +88,8 @@ export default function GlossaryPage() {
             <button
               key={letter}
               disabled={!hasTerms}
+              aria-pressed={isActive}
+              aria-label={`Filter by ${letter}`}
               onClick={() => {
                 setActiveLetter(isActive ? null : letter)
                 setQuery('')
@@ -105,6 +110,7 @@ export default function GlossaryPage() {
         {isFiltering && (
           <button
             onClick={() => { setQuery(''); setActiveLetter(null) }}
+            aria-label="Clear filters"
             className="px-2 h-7 rounded text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 border border-gray-200 dark:border-gray-700 hover:border-gray-300 transition-colors ml-1"
           >
             Clear

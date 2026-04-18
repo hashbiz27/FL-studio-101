@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { BookKey, BookOpen, CheckSquare, Layers } from 'lucide-react'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const tools = [
   {
@@ -45,6 +46,7 @@ const tools = [
 ]
 
 export default function CheatSheetIndexPage() {
+  usePageTitle('Cheat Sheets')
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>

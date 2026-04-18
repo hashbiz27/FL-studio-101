@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Search } from 'lucide-react'
 import { PLUGIN_ENTRIES, type PluginCategory } from '@/data/cheatsheet'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const CATEGORIES: PluginCategory[] = ['Synthesis', 'Sampling', 'Drums', 'Effects', 'Utility']
 
@@ -14,6 +15,7 @@ const CATEGORY_COLORS: Record<PluginCategory, string> = {
 }
 
 export default function PluginsPage() {
+  usePageTitle('Plugin Reference')
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState<PluginCategory | 'All'>('All')
 
@@ -40,10 +42,11 @@ export default function PluginsPage() {
       </div>
 
       {/* Search */}
-      <div className="relative">
+      <div role="search" className="relative">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
         <input
           type="search"
+          aria-label="Search plugins"
           placeholder="Search by task, plugin, or keyword…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -57,6 +60,7 @@ export default function PluginsPage() {
           <button
             key={cat}
             onClick={() => setActiveCategory(cat)}
+            aria-pressed={activeCategory === cat}
             className={cn(
               'px-3 py-1 rounded-full text-xs font-medium transition-colors border',
               activeCategory === cat

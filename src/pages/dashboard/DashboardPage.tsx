@@ -9,8 +9,10 @@ import {
   useNextLesson,
 } from '@/hooks/useProgress'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 export default function DashboardPage() {
+  usePageTitle('Dashboard')
   const { completedCount, percent } = useCourseProgress()
   const moduleProgress = useAllModuleProgress()
   const streak = useStreak()

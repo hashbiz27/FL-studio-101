@@ -6,6 +6,7 @@ import { useChecklistStore } from '@/store/checklistStore'
 import { TOTAL_LESSONS } from '@/data/modules'
 import { CHECKLIST_ITEMS } from '@/data/cheatsheet'
 import { cn } from '@/lib/utils'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 function SettingCard({ title, description, children }: { title: string; description?: string; children: React.ReactNode }) {
   return (
@@ -22,6 +23,7 @@ function SettingCard({ title, description, children }: { title: string; descript
 }
 
 export default function SettingsPage() {
+  usePageTitle('Settings')
   const theme = useUIStore((s) => s.theme)
   const setTheme = useUIStore((s) => s.setTheme)
   const completed = useProgressStore((s) => s.completed)

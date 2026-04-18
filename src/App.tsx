@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import PlatformLayout from '@/layouts/PlatformLayout'
 import LandingPage from '@/pages/LandingPage'
+import NotFoundPage from '@/pages/NotFoundPage'
 import PricingPage from '@/pages/PricingPage'
 import SignInPage from '@/pages/auth/SignInPage'
 import SignUpPage from '@/pages/auth/SignUpPage'
@@ -45,7 +46,7 @@ export default function App() {
           <Route path="/cheatsheet/glossary" element={<GlossaryPage />} />
         </Route>
 
-        <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   )

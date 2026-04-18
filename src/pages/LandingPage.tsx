@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Music2, ArrowRight, CheckCircle2, BookOpen, Layers, Zap, Headphones, Target, Users } from 'lucide-react'
 import { MODULES } from '@/data/modules'
+import { usePageTitle } from '@/hooks/usePageTitle'
 
 const VALUE_PROPS = [
   {
@@ -28,6 +29,7 @@ const STATS = [
 ]
 
 export default function LandingPage() {
+  usePageTitle(null)
   const previewModules = MODULES.slice(0, 9)
 
   return (
@@ -124,7 +126,7 @@ export default function LandingPage() {
             <h2 className="text-2xl font-bold text-center text-white mb-12">
               Why FL Studio 101 is different
             </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {VALUE_PROPS.map(({ icon: Icon, title, body }) => (
                 <div
                   key={title}

@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
-import { Clock, ChevronRight, CheckCircle2, Play, Lock } from 'lucide-react'
+import { Clock, ChevronRight, CheckCircle2, Play, Lock, FileX2 } from 'lucide-react'
 import { getModuleContent } from '@/data/lessons'
 import { useProgressStore } from '@/store/progressStore'
+import EmptyState from '@/components/shared/EmptyState'
+import { useDocumentMeta } from '@/hooks/useDocumentMeta'
 
 const DIFFICULTY_STYLES = {
   beginner: 'text-emerald-600 dark:text-emerald-400',
@@ -14,11 +16,20 @@ export default function ModulePage() {
   const module = getModuleContent(moduleSlug!)
   const completed = useProgressStore((s) => s.completed)
 
+  useDocumentMeta({ title: module?.title ?? null })
+
   if (!module) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-gray-400">
-        Module not found.
-      </div>
+      <EmptyState
+        icon={FileX2}
+        title="Module not found"
+        description="This module doesn't exist or the URL is incorrect."
+        action={
+          <Link to="/learn" className="text-sm font-medium text-studio-500 hover:underline">
+            Back to curriculum
+          </Link>
+        }
+      />
     )
   }
 
