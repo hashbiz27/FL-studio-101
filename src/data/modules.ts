@@ -128,6 +128,30 @@ export const MODULES: ModuleMeta[] = [
     isFree: false,
     estimatedHours: 1.5,
   },
+  {
+    slug: 'module-16-bass-low-end',
+    title: 'Bass & Low End',
+    order: 16,
+    lessonCount: 6,
+    isFree: false,
+    estimatedHours: 1.4,
+  },
+  {
+    slug: 'module-17-sound-design-advanced',
+    title: 'Sound Design II — Advanced',
+    order: 17,
+    lessonCount: 6,
+    isFree: false,
+    estimatedHours: 1.5,
+  },
+  {
+    slug: 'module-18-workflow-mindset',
+    title: 'Workflow & Professional Mindset',
+    order: 18,
+    lessonCount: 5,
+    isFree: false,
+    estimatedHours: 1.2,
+  },
 ]
 
 export const TOTAL_LESSONS = MODULES.reduce((sum, m) => sum + m.lessonCount, 0)
