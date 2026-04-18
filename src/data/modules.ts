@@ -118,7 +118,7 @@ export const MODULES: ModuleMeta[] = [
     order: 14,
     lessonCount: 6,
     isFree: false,
-    estimatedHours: 2.5,
+    estimatedHours: 1.5,
   },
   {
     slug: 'module-15-house',
