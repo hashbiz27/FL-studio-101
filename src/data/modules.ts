@@ -89,12 +89,12 @@ export const MODULES: ModuleMeta[] = [
     estimatedHours: 1.3,
   },
   {
-    slug: 'module-11-effects',
+    slug: 'module-11-space-effects',
     title: 'Space & Effects',
     order: 11,
-    lessonCount: 8,
+    lessonCount: 6,
     isFree: false,
-    estimatedHours: 3,
+    estimatedHours: 1.3,
   },
   {
     slug: 'module-12-mastering',
