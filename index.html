@@ -5,7 +5,24 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Learn FL Studio music production — from complete beginner to advanced. Music-first approach." />
+    <meta property="og:title" content="FL Studio 101" />
+    <meta property="og:description" content="Learn FL Studio music production — from complete beginner to advanced. Music-first approach." />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="FL Studio 101" />
+    <meta name="twitter:card" content="summary" />
     <title>FL Studio 101</title>
+    <!-- Prevent flash of unstyled content: apply theme class before React mounts -->
+    <script>
+      ;(function () {
+        try {
+          var raw = localStorage.getItem('ui-store')
+          var theme = raw ? JSON.parse(raw).state?.theme : undefined
+          if (theme !== 'light') document.documentElement.classList.add('dark')
+        } catch (e) {
+          document.documentElement.classList.add('dark')
+        }
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

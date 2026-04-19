@@ -2,13 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes page-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-page-fade {
+  animation: page-fade 150ms ease-out both;
+}
+
 @layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+  html,
+  body,
+  #root {
+    height: 100%;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply antialiased bg-gray-50 text-gray-900;
+  }
+
+  .dark body {
+    @apply bg-gray-950 text-gray-50;
+  }
+
+  /* Global focus-visible ring */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-studio-500 ring-offset-2 ring-offset-white;
+  }
+
+  .dark *:focus-visible {
+    @apply ring-offset-gray-950;
+  }
+
+  /* Thin scrollbars */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.gray.300') transparent;
+  }
+
+  .dark * {
+    scrollbar-color: theme('colors.gray.700') transparent;
   }
 }
