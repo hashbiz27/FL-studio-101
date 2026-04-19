@@ -218,6 +218,7 @@ export default function Sidebar() {
         <button
           onClick={toggleSidebarCollapse}
           title={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
           className={cn(
             'flex items-center rounded-lg transition-colors w-full',
             'text-gray-500 hover:bg-gray-100 hover:text-gray-700',

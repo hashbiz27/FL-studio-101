@@ -38,7 +38,12 @@ export default function Header() {
 
         <div className="flex-1" />
 
-        {/* Progress summary */}
+        {/* Progress summary — compact pill on mobile, full text on sm+ */}
+        {percent > 0 && (
+          <span className="sm:hidden text-xs font-semibold tabular-nums text-studio-500 bg-studio-500/10 px-2 py-0.5 rounded-full">
+            {percent}%
+          </span>
+        )}
         <div className="hidden sm:flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
           <span className="tabular-nums font-medium text-gray-700 dark:text-gray-300">
             {percent}%
